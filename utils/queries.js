@@ -6,11 +6,12 @@ export async function swap(amount, fromToken, toToken) {
   try {
     let tx = { value: toWei(amount) };
     // console.log("@@@@@@@@@ tx", amount);
-    console.log("@@@@SUPPOSED AMOUNT IN WEI", amount);
+    console.log("@@@@SUPPOSED AMOUNT IN WEI", fromToken, toToken);
     const amountInWei = ethers.utils.parseEther(amount);
+    console.log("@@@@SUPPOSED AMOUNT IN WEI", amountInWei);
 
     const contractObj = await contract();
-    const data = await contractObj.swap(amountInWei, fromToken, toToken);
+    const data = await contractObj.swap(fromToken, amountInWei, toToken);
 
     const receipt = await data.wait();
     return receipt;

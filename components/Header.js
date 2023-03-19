@@ -19,10 +19,10 @@ const Header = () => {
   useEffect(() => {
     setTokenBalComp(
       <>
-        {/* <TokenBalance name={"XDC"} walletAddress={address} /> */}
-        {/* <TokenBalance name={"ETH"} walletAddress={address} />
+        <TokenBalance name={"XDC"} walletAddress={address} />
+        <TokenBalance name={"ETH"} walletAddress={address} />
         <TokenBalance name={"BSC"} walletAddress={address} />
-        <TokenBalance name={"USDT"} walletAddress={address} /> */}
+        <TokenBalance name={"USDT"} walletAddress={address} />
       </>
     );
 

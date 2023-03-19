@@ -191,14 +191,46 @@ const SwapComponent = () => {
       return;
 
     try {
+      const priceFeedData = {
+        XDC: {
+          ETH: 1500,
+          BSC: 2000,
+          USDT: 1.5,
+        },
+        ETH: {
+          XDC: 1 / 1500,
+          BSC: 0.8,
+          USDT: 4000,
+        },
+        BSC: {
+          XDC: 1 / 2000,
+          ETH: 1 / 0.8,
+          USDT: 2000,
+        },
+        USDT: {
+          XDC: 1 / 1.5,
+          ETH: 1 / 4000,
+          BSC: 1 / 2000,
+        },
+      };
+
       if (srcToken !== XDC && destToken !== XDC) setOutputValue(inputValue);
-      else if (srcToken === XDC && destToken !== XDC) {
-        const outValue = toEth(toWei(inputValue), 14);
-        setOutputValue(outValue);
-      } else if (srcToken !== XDC && destToken === XDC) {
-        const outValue = toEth(toWei(inputValue, 14));
-        setOutputValue(outValue);
+      if (srcToken in priceFeedData && destToken in priceFeedData[srcToken]) {
+        const rate = priceFeedData[srcToken][destToken];
+        console.log(inputValue);
+        console.log(rate * inputValue);
+        setOutputValue(inputValue * rate);
+        console.log(inputValue * rate);
+      } else {
+        setOutputValue(0);
       }
+      // else if (srcToken === XDC && destToken !== XDC) {
+      //   const outValue = toEth(toWei(inputValue), 14);
+      //   setOutputValue(outValue);
+      // } else if (srcToken !== XDC && destToken === XDC) {
+      //   const outValue = toEth(toWei(inputValue, 14));
+      //   setOutputValue(outValue);
+      // }
     } catch (error) {
       setOutputValue("0");
     }
