@@ -1,19 +1,5 @@
 import { ethers } from "ethers";
-import CustomDexABI from "./CustomDex.json";
-import CustomTokenABI from "./CustomToken.json";
-
-export const tokenContract = async (address) => {
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const { ethereum } = window;
-
-  if (ethereum) {
-    const signer = provider.getSigner();
-
-    const contractReader = new ethers.Contract(address, CustomTokenABI, signer);
-
-    return contractReader;
-  }
-};
+import XDCPayABI from "./XDCPay.json";
 
 export const contract = async () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -23,8 +9,8 @@ export const contract = async () => {
     const signer = provider.getSigner();
 
     const contractReader = new ethers.Contract(
-      "0xc7a7651483c9a62d6f7b2baa86cd4708fab66017",
-      CustomDexABI.abi,
+      "0xf5a5bF2A97637B2406DC860e0D5Bca710593Aa2a",
+      XDCPayABI.abi,
       signer
     );
 

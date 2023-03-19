@@ -19,9 +19,10 @@ const Header = () => {
   useEffect(() => {
     setTokenBalComp(
       <>
-        <TokenBalance name={"ETH"} walletAddress={address} />
+        {/* <TokenBalance name={"XDC"} walletAddress={address} /> */}
+        {/* <TokenBalance name={"ETH"} walletAddress={address} />
         <TokenBalance name={"BSC"} walletAddress={address} />
-        <TokenBalance name={"USDT"} walletAddress={address} />
+        <TokenBalance name={"USDT"} walletAddress={address} /> */}
       </>
     );
 
@@ -38,7 +39,14 @@ const Header = () => {
       <div className="flex items-center">{tokenBalComp}</div>
 
       <div className="flex">
-        <ConnectButton className="mx-8" accountStatus={"full"} />
+        <ConnectButton
+          className="mx-8"
+          accountStatus={"full"}
+          showBalance={{
+            smallScreen: true,
+            largeScreen: true,
+          }}
+        />
       </div>
 
       <Toaster />

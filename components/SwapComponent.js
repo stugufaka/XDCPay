@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import {
   hasValidAllowance,
   increaseAllowance,
+  swap,
   swapEthToToken,
   swapTokenToEth,
   swapTokenToToken,
@@ -139,11 +140,10 @@ const SwapComponent = () => {
     } else {
       // Check whether there is allowance when the swap deals with tokenToEth/tokenToToken
       setTxPending(true);
-      const result = await hasValidAllowance(address, srcToken, inputValue);
+      // const result = await hasValidAllowance(address, srcToken, inputValue);
       setTxPending(false);
 
-      if (result) performSwap();
-      else handleInsufficientAllowance();
+      performSwap();
     }
   }
 
@@ -231,14 +231,16 @@ const SwapComponent = () => {
 
     let receipt;
 
-    if (srcToken === XDC && destToken !== XDC)
-      receipt = await swapEthToToken(destToken, inputValue);
-    else if (srcToken !== XDC && destToken === XDC)
-      receipt = await swapTokenToEth(srcToken, inputValue);
-    else receipt = await swapTokenToToken(srcToken, destToken, inputValue);
+    // if (srcToken === XDC && destToken !== XDC)
+    // receipt = await swapEthToToken(destToken, inputValue);
+    // else if (srcToken !== XDC && destToken === XDC)
+    // receipt = await swapTokenToEth(srcToken, inputValue);
+    // else
+    receipt = await swap(inputValue, srcToken, destToken);
 
     setTxPending(false);
 
+    console.log("@@@@@@@@@@-Reciept", receipt);
     if (receipt && !receipt.hasOwnProperty("transactionHash"))
       notifyError(receipt);
     else notifySuccess();

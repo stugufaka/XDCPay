@@ -11,20 +11,42 @@ import {
 } from "@rainbow-me/rainbowkit";
 
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
-import { infuraProvider } from "wagmi/providers/infura";
+// import { infuraProvider } from "wagmi/providers/infura";
+import { publicProvider } from "wagmi/providers/public";
 
-const { chains, provider } = configureChains(
-  [chain.goerli],
+const xdcApothem = {
+  id: 51,
+  name: "Apothem-Network (TestNet)",
+  network: "XDC Apothem Network (TestNet)",
+  nativeCurrency: {
+    decimals: 18,
+    name: "XDC-Network",
+    symbol: "XDC",
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://erpc.apothem.network"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Apothem Explorer",
+      url: "https://explorer.apothem.network/",
+    },
+  },
+  testnet: true,
+};
+
+const { provider, chains } = configureChains(
+  [xdcApothem],
   [
-    infuraProvider({
-      apiKey: "f0267a8d7d5642caa8735db53507eefd",
-      priority: 1,
-    }),
+    // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
+    publicProvider(),
   ]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "Custom Dex",
+  appName: "XDCPay",
   chains,
 });
 
