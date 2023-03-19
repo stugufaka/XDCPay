@@ -11,12 +11,12 @@ import { CogIcon, ArrowSmDownIcon } from "@heroicons/react/outline";
 import SwapField from "./SwapField";
 import TransactionStatus from "./TransactionStatus";
 import toast, { Toaster } from "react-hot-toast";
-import { DEFAULT_VALUE, ETH } from "../utils/SupportedCoins";
+import { DEFAULT_VALUE, XDC } from "../utils/SupportedCoins";
 import { toEth, toWei } from "../utils/ether-utils";
 import { useAccount } from "wagmi";
 
 const SwapComponent = () => {
-  const [srcToken, setSrcToken] = useState(ETH);
+  const [srcToken, setSrcToken] = useState(XDC);
   const [destToken, setDestToken] = useState(DEFAULT_VALUE);
 
   const [inputValue, setInputValue] = useState();
@@ -134,7 +134,7 @@ const SwapComponent = () => {
   );
 
   async function handleSwap() {
-    if (srcToken === ETH && destToken !== ETH) {
+    if (srcToken === XDC && destToken !== XDC) {
       performSwap();
     } else {
       // Check whether there is allowance when the swap deals with tokenToEth/tokenToToken
@@ -191,11 +191,11 @@ const SwapComponent = () => {
       return;
 
     try {
-      if (srcToken !== ETH && destToken !== ETH) setOutputValue(inputValue);
-      else if (srcToken === ETH && destToken !== ETH) {
+      if (srcToken !== XDC && destToken !== XDC) setOutputValue(inputValue);
+      else if (srcToken === XDC && destToken !== XDC) {
         const outValue = toEth(toWei(inputValue), 14);
         setOutputValue(outValue);
-      } else if (srcToken !== ETH && destToken === ETH) {
+      } else if (srcToken !== XDC && destToken === XDC) {
         const outValue = toEth(toWei(inputValue, 14));
         setOutputValue(outValue);
       }
@@ -213,11 +213,11 @@ const SwapComponent = () => {
       return;
 
     try {
-      if (srcToken !== ETH && destToken !== ETH) setInputValue(outputValue);
-      else if (srcToken === ETH && destToken !== ETH) {
+      if (srcToken !== XDC && destToken !== XDC) setInputValue(outputValue);
+      else if (srcToken === XDC && destToken !== XDC) {
         const outValue = toEth(toWei(outputValue, 14));
         setInputValue(outValue);
-      } else if (srcToken !== ETH && destToken === ETH) {
+      } else if (srcToken !== XDC && destToken === XDC) {
         const outValue = toEth(toWei(outputValue), 14);
         setInputValue(outValue);
       }
@@ -231,9 +231,9 @@ const SwapComponent = () => {
 
     let receipt;
 
-    if (srcToken === ETH && destToken !== ETH)
+    if (srcToken === XDC && destToken !== XDC)
       receipt = await swapEthToToken(destToken, inputValue);
-    else if (srcToken !== ETH && destToken === ETH)
+    else if (srcToken !== XDC && destToken === XDC)
       receipt = await swapTokenToEth(srcToken, inputValue);
     else receipt = await swapTokenToToken(srcToken, destToken, inputValue);
 

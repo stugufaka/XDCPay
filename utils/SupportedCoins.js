@@ -1,5 +1,5 @@
-export const ETH = 'Eth'
-export const COINA = 'CoinA'
-export const COINB = 'CoinB'
-export const COINC = 'CoinC'
-export const DEFAULT_VALUE = 'Select a token'
+export const XDC = "XDC";
+export const ETH = "ETH";
+export const BSC = "BSC";
+export const USDT = "USDT";
+export const DEFAULT_VALUE = "Select a token";
