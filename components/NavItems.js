@@ -28,6 +28,14 @@ const NavItems = () => {
           {PAY}
         </p>
       </Link>
+      <Link href="/lending">
+        <p
+          className={getNavIconClassName(XLENDING)}
+          onClick={() => setSelectedNavItem(XLENDING)}
+        >
+          {XLENDING}
+        </p>
+      </Link>
     </div>
   );
 

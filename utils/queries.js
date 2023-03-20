@@ -20,12 +20,12 @@ export async function swap(amount, fromToken, toToken) {
   }
 }
 
-export async function pay(amount, token) {
+export async function pay(amount, token, recipient) {
   try {
     let tx = { value: toWei(amount) };
 
     const contractObj = await contract();
-    const data = await contractObj.pay(tx, token);
+    const data = await contractObj.pay(token, tx, recipient);
 
     const receipt = await data.wait();
     return receipt;
@@ -34,6 +34,33 @@ export async function pay(amount, token) {
   }
 }
 
+export async function schedulePayemnt(token, amount, timeInterval) {
+  try {
+    let tx = { value: toWei(amount) };
+
+    const contractObj = await contract();
+    const data = await contractObj.schedulePayment(token, tx, timeInterval);
+
+    const receipt = await data.wait();
+    return receipt;
+  } catch (e) {
+    return parseErrorMsg(e);
+  }
+}
+
+export async function getPaymentHistory() {
+  try {
+    let tx = { value: toWei(amount) };
+
+    const contractObj = await contract();
+    const data = await contractObj.getAllPaymentHistory();
+
+    const receipt = await data.wait();
+    return receipt;
+  } catch (e) {
+    return parseErrorMsg(e);
+  }
+}
 export async function convert(tokenName, amount) {
   try {
     const contractObj = await contract();
