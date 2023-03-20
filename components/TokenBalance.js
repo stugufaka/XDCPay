@@ -36,10 +36,17 @@ const TokenBalance = ({ name, walletAddress }) => {
     const bal = await getTokenBalance(name, walletAddress);
 
     const fBal = ethers.utils.formatUnits(bal.toString(), 18);
-    console.log("@@@@@@@@", fBal);
-    console.log("@@@@@@@@", walletAddress);
 
-    setBalance(fBal.toString());
+    // const output = ethers.utils.formatEther("998.531227839").slice(0, -1); // remove the " ether" suffix and take only the first 4 characters
+    // console.log(output); // logs "0.036"
+    // console.log("@@@@@@@@", fBal);
+    console.log("@@@@@@@@", fBal.toString() / 10 ** 18);
+
+    setBalance(
+      name === "XDC"
+        ? parseFloat(fBal.toString()).toFixed(1)
+        : fBal.toString() / 10 ** 18
+    );
   }
 
   const { data, isError, isLoading } = useBalance({

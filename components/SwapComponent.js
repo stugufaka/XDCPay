@@ -193,24 +193,25 @@ const SwapComponent = () => {
     try {
       const priceFeedData = {
         XDC: {
-          ETH: 1500,
-          BSC: 2000,
-          USDT: 1.5,
+          // ETH: 0.0000199,
+          ETH: 199 / 10000000,
+          BSC: 0.00009459,
+          USDT: 0.036,
         },
         ETH: {
-          XDC: 1 / 1500,
-          BSC: 0.8,
-          USDT: 4000,
+          XDC: 52639,
+          BSC: 5.35,
+          USDT: 1800.58,
         },
         BSC: {
-          XDC: 1 / 2000,
-          ETH: 1 / 0.8,
-          USDT: 2000,
+          XDC: 9551.67,
+          ETH: 0.19,
+          USDT: 335.9,
         },
         USDT: {
-          XDC: 1 / 1.5,
-          ETH: 1 / 4000,
-          BSC: 1 / 2000,
+          XDC: 28.32,
+          ETH: 0.00055,
+          BSC: 0.003,
         },
       };
 

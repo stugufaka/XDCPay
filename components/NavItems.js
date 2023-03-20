@@ -4,8 +4,9 @@ import { ArrowSmUpIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 
 const NavItems = () => {
-  const CONVERT = "Convert";
-  const PAY = "Payment";
+  const CONVERT = "XConvert";
+  const PAY = "XPayment";
+  const XLENDING = "XLending";
 
   const [selectedNavItem, setSelectedNavItem] = useState(CONVERT);
 
