@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import XDCPayABI from "./XDCPay.json";
+import XLending from "./XLending.json";
 
 export const contract = async () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -9,8 +10,25 @@ export const contract = async () => {
     const signer = provider.getSigner();
 
     const contractReader = new ethers.Contract(
-      "0xE075629Ce7509974C337975e159F84bdEC323930",
+      "0xb11dd1e60D576F371e3458b788f0562e0add545D",
       XDCPayABI.abi,
+      signer
+    );
+
+    return contractReader;
+  }
+};
+
+export const lendingContract = async () => {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const { ethereum } = window;
+
+  if (ethereum) {
+    const signer = provider.getSigner();
+
+    const contractReader = new ethers.Contract(
+      "0x241f794Be24b177d542483cD2B0F96e756255b32",
+      XLending.abi,
       signer
     );
 
