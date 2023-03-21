@@ -33,7 +33,6 @@ const PaymentComponents = () => {
     <div className="bg-zinc-900 w-[35%] p-4 px-6 rounded-xl">
       <div className="flex items-center justify-between py-4 px-1">
         <p>XPayment - Make payment accross the globe</p>
-        <CogIcon className="h-6" />
       </div>
       <div className="relative bg-[#212429] p-4 py-6 rounded-xl mb-2 border-[2px] border-transparent hover:border-zinc-600">
         {/* {srcTokenComp} */}

@@ -23,9 +23,12 @@ export async function swap(amount, fromToken, toToken) {
 export async function pay(amount, token, recipient) {
   try {
     let tx = { value: toWei(amount) };
-
+    const amountInWei = ethers.utils.parseEther(amount);
+    console.log(amountInWei);
     const contractObj = await contract();
-    const data = await contractObj.pay(token, tx, recipient);
+    const data = await contractObj.pay(token, amountInWei, recipient, {
+      value: amountInWei,
+    });
 
     const receipt = await data.wait();
     return receipt;
