@@ -5,7 +5,6 @@ import { toEth } from "./ether-utils";
 export async function swap(amount, fromToken, toToken) {
   try {
     let tx = { value: toWei(amount) };
-    // console.log("@@@@@@@@@ tx", amount);
     console.log("@@@@SUPPOSED AMOUNT IN WEI", fromToken, toToken);
     const amountInWei = ethers.utils.parseEther(amount);
     console.log("@@@@SUPPOSED AMOUNT IN WEI", amountInWei);

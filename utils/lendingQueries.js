@@ -1,9 +1,10 @@
 import { ethers } from "ethers";
-import {} from "./contract";
+import { lendingContract, contract } from "./contract";
 
 export async function becomeALender() {
   try {
-    const data = await contract.becomeALender();
+    const contractObj = await lendingContract();
+    const data = await contractObj.becomeALender();
     const receipt = await data.wait();
     return receipt;
   } catch (e) {
@@ -13,7 +14,8 @@ export async function becomeALender() {
 
 export async function becomeABorrower() {
   try {
-    const data = await contract.becomeABorrower();
+    const contractObj = await lendingContract();
+    const data = await contractObj.becomeABorrower();
     const receipt = await data.wait();
     return receipt;
   } catch (e) {
@@ -23,7 +25,8 @@ export async function becomeABorrower() {
 
 export async function addInterestRate(interestRate) {
   try {
-    const data = await contract.addInterestRate(interestRate);
+    const contractObj = await lendingContract();
+    const data = await contractObj.addInterestRate(interestRate);
     const receipt = await data.wait();
     return receipt;
   } catch (e) {
@@ -38,7 +41,8 @@ export async function requestLoan(
   deadline
 ) {
   try {
-    const data = await contract.requestLoan(
+    const contractObj = await lendingContract();
+    const data = await contractObj.requestLoan(
       lenderAddress,
       loanAmount,
       interestRate,
@@ -53,8 +57,10 @@ export async function requestLoan(
 
 export async function getPendingLoans() {
   try {
-    const data = await contract.getPendingLoans();
-    return data;
+    const contractObj = await lendingContract();
+    const data = await contractObj.getPendingLoans();
+    const receipt = await data.wait();
+    return receipt;
   } catch (e) {
     return parseErrorMsg(e);
   }
@@ -62,8 +68,10 @@ export async function getPendingLoans() {
 
 export async function getAllUnpaidLoans() {
   try {
-    const data = await contract.getAllUnpaidLoans();
-    return data;
+    const contractObj = await lendingContract();
+    const data = await contractObj.getAllUnpaidLoans();
+    const receipt = await data.wait();
+    return receipt;
   } catch (e) {
     return parseErrorMsg(e);
   }
@@ -71,8 +79,10 @@ export async function getAllUnpaidLoans() {
 
 export async function isLender(address) {
   try {
-    const data = await contract.isLender(address);
-    return data;
+    const contractObj = await lendingContract();
+    const data = await contractObj.isLender(address);
+    const receipt = await data.wait();
+    return receipt;
   } catch (e) {
     return parseErrorMsg(e);
   }
@@ -80,8 +90,10 @@ export async function isLender(address) {
 
 export async function isBorrower(address) {
   try {
-    const data = await contract.isBorrower(address);
-    return data;
+    const contractObj = await lendingContract();
+    const data = await contractObj.isBorrower(address);
+    const receipt = await data.wait();
+    return receipt;
   } catch (e) {
     return parseErrorMsg(e);
   }
@@ -89,8 +101,10 @@ export async function isBorrower(address) {
 
 export async function getAllLenders() {
   try {
-    const data = await contract.getAllLenders();
-    return data;
+    const contractObj = await lendingContract();
+    const data = await contractObj.getAllLenders();
+    const receipt = await data.wait();
+    return receipt;
   } catch (e) {
     return parseErrorMsg(e);
   }
@@ -98,8 +112,10 @@ export async function getAllLenders() {
 
 export async function getAllBorrowers() {
   try {
-    const data = await contract.getAllBorrowers();
-    return data;
+    const contractObj = await lendingContract();
+    const data = await contractObj.getAllBorrowers();
+    const receipt = await data.wait();
+    return receipt;
   } catch (e) {
     return parseErrorMsg(e);
   }
@@ -107,7 +123,8 @@ export async function getAllBorrowers() {
 
 export async function approveLoan(borrowerAddress, loanId) {
   try {
-    const data = await contract.approveLoan(borrowerAddress, loanId);
+    const contractObj = await lendingContract();
+    const data = await contractObj.approveLoan(borrowerAddress, loanId);
     const receipt = await data.wait();
     return receipt;
   } catch (e) {
@@ -118,7 +135,8 @@ export async function approveLoan(borrowerAddress, loanId) {
 export async function repay(loanId, amount) {
   try {
     const valueInWei = ethers.utils.parseEther(amount.toString());
-    const data = await contract.repay(loanId, { value: valueInWei });
+    const contractObj = await lendingContract();
+    const data = await contractObj.repay(loanId, { value: valueInWei });
     const receipt = await data.wait();
     return receipt;
   } catch (e) {
@@ -128,8 +146,10 @@ export async function repay(loanId, amount) {
 
 export async function isLoanPaid(loanId) {
   try {
-    const data = await contract.isLoanPaid(loanId);
-    return data;
+    const contractObj = await lendingContract();
+    const data = await contractObj.isLoanPaid(loanId);
+    const receipt = await data.wait();
+    return receipt;
   } catch (e) {
     return parseErrorMsg(e);
   }
