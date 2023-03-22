@@ -27,7 +27,7 @@ export const lendingContract = async () => {
     const signer = provider.getSigner();
 
     const contractReader = new ethers.Contract(
-      "0x0729d0199AdEc19A6b9C8Ed24225591F989d9544",
+      "0xa37D6E4798F3772e05137E1038D96CDE017cb362",
       XLending.abi,
       signer
     );

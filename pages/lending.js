@@ -31,7 +31,7 @@ export default function Home() {
         const signer = provider.getSigner();
 
         const xlendingInstance = new ethers.Contract(
-          "0x0729d0199AdEc19A6b9C8Ed24225591F989d9544",
+          "0xa37D6E4798F3772e05137E1038D96CDE017cb362",
           XLending.abi,
           signer
         );
@@ -58,10 +58,20 @@ export default function Home() {
       {isLender == false && isBorrower == false ? (
         <div className="flex flex-col justify-center items-center h-screen">
           <div className="flex justify-center">
-            <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-8 rounded-full mr-2">
+            <button
+              onClick={() => {
+                becomeLender();
+              }}
+              className="bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-8 rounded-full mr-2"
+            >
               I want to lend
             </button>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-4 px-8 rounded-full">
+            <button
+              onClick={() => {
+                becomeBorrower();
+              }}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-4 px-8 rounded-full"
+            >
               I want to borrow
             </button>
           </div>
@@ -87,6 +97,8 @@ export default function Home() {
       ) : (
         ""
       )}
+
+      {txPending && <TransactionStatus />}
 
       {/* <button
       // onClick={async () => {
