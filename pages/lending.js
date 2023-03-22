@@ -24,6 +24,7 @@ export default function Home() {
   const [isLender, setIsLender] = useState("");
   const [isBorrower, setIsBorrower] = useState("");
   const [interestRate, setInterestRate] = useState(0);
+  const [pendingLoans, setpendingLoans] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -44,10 +45,13 @@ export default function Home() {
         const allLenders = await xlendingInstance.getAllLenders();
         const isLender = await xlendingInstance.isLender(address);
         const isBorrower = await xlendingInstance.isBorrower(address);
-        const upaidLoans = await xlendingInstance.borrowerPendingLoans();
+        const pendingloans = await xlendingInstance.getPendingLoans();
+        // const upaidLoans = await xlendingInstance.borrowerPendingLoans();
 
-        console.log(upaidLoans.toString());
+        // console.log(upaidLoans);
+        // console.log(upaidLoans[0].loanAmount.toString());
         // Set the state to the list of all lenders
+        setpendingLoans(pendingLoans);
         setIsLender(isLender);
         setIsBorrower(isBorrower);
         setLenders(allLenders);
@@ -95,7 +99,7 @@ export default function Home() {
         ""
       )}
       {isLender == true ? (
-        <Lender />
+        <Lender data={pendingLoans} />
       ) : (
         // <div className="flex flex-col justify-center items-center h-screen">
         //   <div className="flex justify-center">
