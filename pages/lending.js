@@ -51,7 +51,7 @@ export default function Home() {
         // console.log(upaidLoans);
         // console.log(upaidLoans[0].loanAmount.toString());
         // Set the state to the list of all lenders
-        setpendingLoans(pendingLoans);
+        setpendingLoans(pendingloans);
         setIsLender(isLender);
         setIsBorrower(isBorrower);
         setLenders(allLenders);
@@ -62,7 +62,7 @@ export default function Home() {
   }, []);
 
   console.log(isLender == false && isBorrower == false);
-  console.log(lenders);
+  console.log(pendingLoans);
 
   function handleInterestRate() {
     const rate = window.prompt("Enter your interest rate:");

@@ -4,97 +4,18 @@ import "tailwindcss/tailwind.css"; // Import Tailwind CSS styles
 import { Dialog } from "@headlessui/react";
 import XLending from "../utils/XLending.json";
 import TransactionStatus from "./TransactionStatus";
-import { requestLoan } from "../utils/lendingQueries";
-function RequestLoanDialog({ open, setOpen, onSubmit }) {
-  const [loanAmount, setLoanAmount] = useState("");
-  const [interestRate, setInterestRate] = useState("");
-  const [deadline, setDeadline] = useState("");
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(loanAmount, interestRate, deadline);
-    setOpen(false);
-  };
+import { approveLoan, requestLoan } from "../utils/lendingQueries";
 
-  return (
-    <Dialog
-      open={open}
-      onClose={() => setOpen(false)}
-      className="fixed z-50 inset-0 overflow-y-auto"
-    >
-      <div className="flex items-center justify-center min-h-screen">
-        <Dialog.Overlay className="fixed inset-0 -z-50 bg-black opacity-30" />
-
-        <div className="bg-gray-900 p-6 rounded-lg">
-          <h2 className="text-2xl font-bold mb-6">Request Loan</h2>
-
-          <form onSubmit={handleSubmit}>
-            <label className="block mb-2">
-              Loan Amount:
-              <input
-                type="number"
-                value={loanAmount}
-                onChange={(e) => setLoanAmount(e.target.value)}
-                className="block text-white border-gray-300 rounded-md w-full mt-1"
-                required
-              />
-            </label>
-
-            <label className="block mb-2">
-              Interest Rate:
-              <input
-                type="number"
-                value={interestRate}
-                onChange={(e) => setInterestRate(e.target.value)}
-                className="block text-white border-gray-300 rounded-md w-full mt-1"
-                required
-              />
-            </label>
-
-            <label className="block mb-4">
-              Deadline:
-              <input
-                type="datetime-local"
-                value={deadline}
-                onChange={(e) => setDeadline(e.target.value)}
-                className="block text-white border-gray-300 rounded-md w-full mt-1"
-                required
-              />
-            </label>
-
-            <button
-              onClick={() => {}}
-              className="bg-blue-500 text-white rounded-md px-4 py-2"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
-      </div>
-    </Dialog>
-  );
-}
 const Lender = ({ data }) => {
+  console.log(data);
   const [open, setOpen] = useState(false);
   const [address, setAddress] = useState("");
   const [txPending, setTxPending] = useState(false);
+  const [index, setindex] = useState("");
 
-  async function requestLoanH() {
-    handleInterestRate();
+  const handleRequestLoan = async () => {
     setTxPending(true);
-    let value = await requestLoan();
-    console.log(value);
-    setTxPending(false);
-    return value;
-  }
-
-  const handleRequestLoan = async (loanAmount, interestRate, deadline) => {
-    // Code to submit loan request to the contract
-    console.log(`Loan Amount: ${loanAmount}`);
-    console.log(`Interest Rate: ${interestRate}`);
-    console.log(`Deadline: ${deadline}`);
-
-    setTxPending(true);
-    let value = await requestLoan(address, loanAmount, interestRate, deadline);
+    let value = await approveLoan(address, index);
     console.log(value);
     setTxPending(false);
     return value;
@@ -102,11 +23,6 @@ const Lender = ({ data }) => {
 
   return (
     <>
-      <RequestLoanDialog
-        open={open}
-        setOpen={setOpen}
-        onSubmit={handleRequestLoan}
-      />
       <div class="relative w-5/6 overflow-x-auto shadow-md sm:rounded-lg">
         <p className="text-lg py-4">List of All lenders you can borrow from</p>
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -122,7 +38,7 @@ const Lender = ({ data }) => {
                 loanAmount
               </th>
               <th scope="col" class="px-6 py-3">
-                score
+                Borrowers score
               </th>
               <th scope="col" class="px-6 py-3">
                 Action
@@ -145,10 +61,12 @@ const Lender = ({ data }) => {
                       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 rounded-full focus:ring-blue-300 font-medium text-sm px-5 py-2.5  mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                       onClick={() => {
                         setOpen(true);
-                        setAddress(items.lenderAddress);
+                        setAddress(items.borrowerAddress);
+                        setindex(index);
+                        handleRequestLoan();
                       }}
                     >
-                      Request Loan
+                      Give loan out{" "}
                     </button>
                   </td>
                 </tr>
