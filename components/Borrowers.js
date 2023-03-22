@@ -2,12 +2,13 @@ import { ethers } from "ethers";
 import React, { useState, useEffect } from "react";
 import "tailwindcss/tailwind.css"; // Import Tailwind CSS styles
 import { Dialog } from "@headlessui/react";
-
+import XLending from "../utils/XLending.json";
+import TransactionStatus from "./TransactionStatus";
+import { requestLoan } from "../utils/lendingQueries";
 function RequestLoanDialog({ open, setOpen, onSubmit }) {
   const [loanAmount, setLoanAmount] = useState("");
   const [interestRate, setInterestRate] = useState("");
   const [deadline, setDeadline] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(loanAmount, interestRate, deadline);
@@ -60,7 +61,10 @@ function RequestLoanDialog({ open, setOpen, onSubmit }) {
               />
             </label>
 
-            <button className="bg-blue-500 text-white rounded-md px-4 py-2">
+            <button
+              onClick={() => {}}
+              className="bg-blue-500 text-white rounded-md px-4 py-2"
+            >
               Submit
             </button>
           </form>
@@ -71,12 +75,29 @@ function RequestLoanDialog({ open, setOpen, onSubmit }) {
 }
 const Borrower = ({ data }) => {
   const [open, setOpen] = useState(false);
+  const [address, setAddress] = useState("");
+  const [txPending, setTxPending] = useState(false);
 
-  const handleRequestLoan = (loanAmount, interestRate, deadline) => {
+  async function requestLoanH() {
+    handleInterestRate();
+    setTxPending(true);
+    let value = await requestLoan();
+    console.log(value);
+    setTxPending(false);
+    return value;
+  }
+
+  const handleRequestLoan = async (loanAmount, interestRate, deadline) => {
     // Code to submit loan request to the contract
     console.log(`Loan Amount: ${loanAmount}`);
     console.log(`Interest Rate: ${interestRate}`);
     console.log(`Deadline: ${deadline}`);
+
+    setTxPending(true);
+    let value = await requestLoan(address, loanAmount, interestRate, deadline);
+    console.log(value);
+    setTxPending(false);
+    return value;
   };
 
   return (
@@ -114,11 +135,14 @@ const Borrower = ({ data }) => {
                     {ethers.utils.formatUnits(items.balance.toString())}
                   </td>
                   <td class="px-6 py-4">{items.interestRate.toString()}</td>
-                  <td class="px-6 py-4 text-right">
+                  <td class="px-6 py-4 text-left">
                     <button
                       type="button"
                       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 rounded-full focus:ring-blue-300 font-medium text-sm px-5 py-2.5  mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                      onClick={() => setOpen(true)}
+                      onClick={() => {
+                        setOpen(true);
+                        setAddress(items.lenderAddress);
+                      }}
                     >
                       Request Loan
                     </button>
@@ -129,6 +153,7 @@ const Borrower = ({ data }) => {
           </tbody>
         </table>
       </div>
+      {txPending && <TransactionStatus />}
     </>
   );
 };

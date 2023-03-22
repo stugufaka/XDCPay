@@ -42,11 +42,17 @@ export async function requestLoan(
 ) {
   try {
     const contractObj = await lendingContract();
+    const amountInWei = ethers.utils.parseEther(loanAmount);
+    console.log(deadline);
+
+    let value_ = ethers.utils.parseUnits(loanAmount?.toString(), "ether");
+    const unixTime = Math.floor(new Date(deadline).getTime() / 1000);
+
     const data = await contractObj.requestLoan(
       lenderAddress,
-      loanAmount,
+      value_,
       interestRate,
-      deadline
+      unixTime
     );
     const receipt = await data.wait();
     return receipt;

@@ -35,7 +35,7 @@ export default function Home() {
         const signer = provider.getSigner();
 
         const xlendingInstance = new ethers.Contract(
-          "0x721002132A3434Fc8Ef856f52704D3c4321e305B",
+          "0xFB751FFf9Af97EE517BcBeC04C6A8384e3C8eB2B",
           XLending.abi,
           signer
         );
@@ -44,6 +44,9 @@ export default function Home() {
         const allLenders = await xlendingInstance.getAllLenders();
         const isLender = await xlendingInstance.isLender(address);
         const isBorrower = await xlendingInstance.isBorrower(address);
+        const upaidLoans = await xlendingInstance.borrowerPendingLoans();
+
+        console.log(upaidLoans.toString());
         // Set the state to the list of all lenders
         setIsLender(isLender);
         setIsBorrower(isBorrower);
