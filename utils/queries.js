@@ -63,6 +63,7 @@ export async function getPaymentHistory() {
     return parseErrorMsg(e);
   }
 }
+
 export async function convert(tokenName, amount) {
   try {
     const contractObj = await contract();

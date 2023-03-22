@@ -35,7 +35,7 @@ export default function Home() {
         const signer = provider.getSigner();
 
         const xlendingInstance = new ethers.Contract(
-          "0x2cBb1c49eD938D970FA971045185ed78Af379730",
+          "0x721002132A3434Fc8Ef856f52704D3c4321e305B",
           XLending.abi,
           signer
         );
@@ -56,6 +56,14 @@ export default function Home() {
 
   console.log(isLender == false && isBorrower == false);
   console.log(lenders);
+
+  function handleInterestRate() {
+    const rate = window.prompt("Enter your interest rate:");
+    if (rate !== null && rate !== "") {
+      setInterestRate(parseFloat(rate));
+    }
+  }
+
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-emerald-400">
       <Header />
@@ -135,13 +143,6 @@ export default function Home() {
     console.log(value);
     setTxPending(false);
     return value;
-  }
-
-  function handleInterestRate() {
-    const rate = window.prompt("Enter your interest rate:");
-    if (rate !== null && rate !== "") {
-      setInterestRate(parseFloat(rate));
-    }
   }
 
   async function becomeBorrower() {
