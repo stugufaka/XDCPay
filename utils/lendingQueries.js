@@ -101,9 +101,10 @@ export async function isBorrower(address) {
 
 export async function getAllLenders() {
   try {
-    const contractObj = await lendingContract();
-    const data = await contractObj.getAllLenders();
+    // const contractObj = await lendingContract();
+    const data = await lendingContract.getAllLenders();
     const receipt = await data.wait();
+    console.log(receipt);
     return receipt;
   } catch (e) {
     return parseErrorMsg(e);
