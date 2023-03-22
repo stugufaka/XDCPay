@@ -15,12 +15,16 @@ import {
 import { useAccount } from "wagmi";
 import TransactionStatus from "../components/TransactionStatus";
 import { getPaymentHistory, getTokenBalance } from "../utils/queries";
+import Lender from "../components/Lender";
+import Borrower from "../components/Borrowers";
 export default function Home() {
   const { address } = useAccount();
   const [txPending, setTxPending] = useState(false);
   const [lenders, setLenders] = useState("");
   const [isLender, setIsLender] = useState("");
   const [isBorrower, setIsBorrower] = useState("");
+  const [interestRate, setInterestRate] = useState(0);
+
   useEffect(() => {
     async function fetchData() {
       // Connect to the Ethereum network using MetaMask
@@ -31,7 +35,7 @@ export default function Home() {
         const signer = provider.getSigner();
 
         const xlendingInstance = new ethers.Contract(
-          "0xa37D6E4798F3772e05137E1038D96CDE017cb362",
+          "0x2cBb1c49eD938D970FA971045185ed78Af379730",
           XLending.abi,
           signer
         );
@@ -51,7 +55,7 @@ export default function Home() {
   }, []);
 
   console.log(isLender == false && isBorrower == false);
-
+  console.log(lenders);
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-emerald-400">
       <Header />
@@ -80,21 +84,23 @@ export default function Home() {
         ""
       )}
       {isLender == true ? (
-        <div className="flex flex-col justify-center items-center h-screen">
-          <div className="flex justify-center">
-            <p>You are a lender</p>
-          </div>
-        </div>
+        <Lender />
       ) : (
+        // <div className="flex flex-col justify-center items-center h-screen">
+        //   <div className="flex justify-center">
+        //     <p>You are a lender</p>
+        //   </div>
+        // </div>
         ""
       )}
       {isBorrower == true ? (
-        <div className="flex flex-col justify-center items-center h-screen">
-          <div className="flex justify-center">
-            <p>You are a borrower</p>
-          </div>
-        </div>
+        <Borrower data={lenders} />
       ) : (
+        // <div className="flex flex-col justify-center items-center h-screen">
+        //   <div className="flex justify-center">
+        //     <p>You are a borrower</p>
+        //   </div>
+        // </div>
         ""
       )}
 
@@ -123,11 +129,19 @@ export default function Home() {
   );
 
   async function becomeLender() {
+    handleInterestRate();
     setTxPending(true);
-    let value = await becomeALender();
+    let value = await becomeALender(interestRate);
     console.log(value);
     setTxPending(false);
     return value;
+  }
+
+  function handleInterestRate() {
+    const rate = window.prompt("Enter your interest rate:");
+    if (rate !== null && rate !== "") {
+      setInterestRate(parseFloat(rate));
+    }
   }
 
   async function becomeBorrower() {

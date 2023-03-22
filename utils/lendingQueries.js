@@ -1,10 +1,10 @@
 import { ethers } from "ethers";
 import { lendingContract, contract } from "./contract";
 
-export async function becomeALender() {
+export async function becomeALender(interestRate) {
   try {
     const contractObj = await lendingContract();
-    const data = await contractObj.becomeALender();
+    const data = await contractObj.becomeALender(interestRate);
     const receipt = await data.wait();
     return receipt;
   } catch (e) {

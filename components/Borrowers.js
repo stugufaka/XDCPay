@@ -1,7 +1,8 @@
 import React from "react";
 import "tailwindcss/tailwind.css"; // Import Tailwind CSS styles
 
-const Lender = () => {
+const Borrower = ({ data }) => {
+  console.log(data);
   return (
     <div class="relative w-5/6 overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -88,4 +89,4 @@ const Lender = () => {
   );
 };
 
-export default Lender;
+export default Borrower;
