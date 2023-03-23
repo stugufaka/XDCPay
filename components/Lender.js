@@ -40,40 +40,34 @@ const Lender = ({ data, loangivenout, instance }) => {
     <>
       <div class="relative w-5/6 overflow-x-auto shadow-md sm:rounded-lg">
         <p className="text-lg py-4">List of Loans directed to you</p>
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" class="px-6 py-3">
-                Borrower Address{" "}
-              </th>
-              <th scope="col" class="px-6 py-3">
-                interestRate{" "}
-              </th>
-              <th scope="col" class="px-6 py-3">
-                loanAmount
-              </th>
-              <th scope="col" class="px-6 py-3">
-                Borrowers score
-              </th>
-              <th scope="col" class="px-6 py-3">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {data?.map((items, index) => {
-              return (
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                  <td class="px-6 py-4">{items.borrowerAddress}</td>
-                  <td class="px-6 py-4">{items.interestRate.toString()}</td>
-                  <td class="px-6 py-4">
+
+        <div className="  p-4 px-6 rounded-xl h-max">
+          <table className="table table-zebra w-full">
+            {/* head */}
+            <thead>
+              <tr>
+                <th></th>
+                <th> Borrower Address</th>
+                <th>InterestRatet</th>
+                <th> LoanAmount</th>
+                <th> Borrowers score</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.map((items, index) => (
+                <tr>
+                  <th>{index + 1}</th>
+                  <th>{items.borrowerAddress}</th>
+                  <td>{items.interestRate.toString()}</td>
+                  <td>
                     {ethers.utils.formatUnits(items.loanAmount.toString())}
                   </td>
-                  <td class="px-6 py-4">{items.score.toString()}</td>
-                  <td class="px-6 py-4 text-left">
-                    <button
-                      type="button"
-                      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 rounded-full focus:ring-blue-300 font-medium text-sm px-5 py-2.5  mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                  <td>{items.score.toString()}</td>
+                  <td>
+                    <label
+                      htmlFor="my-modal"
+                      className="btn-primary rounded-full px-3 py-2"
                       onClick={() => {
                         setOpen(true);
                         setAddress(items.borrowerAddress);
@@ -82,13 +76,13 @@ const Lender = ({ data, loangivenout, instance }) => {
                       }}
                     >
                       {loanstatus_ ? "Approved" : "Approve"}
-                    </button>
+                    </label>
                   </td>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {txPending && <TransactionStatus />}
