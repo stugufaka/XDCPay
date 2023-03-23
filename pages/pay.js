@@ -30,20 +30,71 @@ export default function Home() {
         sethistory(paymentHistory);
       }
     }
-
     fetchData();
   }, []);
 
+  const [tabactivepay, settabactivepay] = useState(true);
+  const [tabactivehis, settabactivehis] = useState("");
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-emerald-400">
       <Header />
       {/* <SwapComponent /> */}
-      {/* <Footer /> */}
-      <PaymentComponent paymenthistory={history} />
-      <p>Payment History</p>
+      <div className="tabs tabs-boxed mb-9">
+        <a
+          className={`tab ${tabactivepay && "tab-active"}`}
+          onClick={() => {
+            settabactivehis(false);
+            settabactivepay(true);
+          }}
+        >
+          Payment
+        </a>
+        <a
+          className={`tab ${tabactivehis && "tab-active"}`}
+          onClick={() => {
+            settabactivehis(true);
+            settabactivepay(false);
+          }}
+        >
+          Payment History
+        </a>
+      </div>
+      {tabactivepay ? (
+        <PaymentComponent paymenthistory={history} />
+      ) : (
+        <div className="md:w-[35%] w-[80%]  p-4 px-6 rounded-xl h-max">
+          <table className="table table-zebra w-full">
+            {/* head */}
+            <thead>
+              <tr>
+                <th></th>
+                <th>Token</th>
+                <th>Amount</th>
+                <th>Reciepient Address</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {history.map((items, index) => (
+                <tr>
+                  <th>{index}</th>
+                  <td>{items.token}</td>
+                  <td>{ethers.utils.formatUnits(items?.amount?.toString())}</td>
+                  <td>
+                    {new Date(
+                      items?.timestamp?.toString() * 1000
+                    ).toLocaleString()}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {/* <p>Payment History</p */}
 
-      <table class="w-[60%] text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      {/* <table class="w-[60%] rounded-10 text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs rounded-full text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" class="px-6 py-3">
               Token
@@ -77,7 +128,9 @@ export default function Home() {
             );
           })}
         </tbody>
-      </table>
+      </table> */}
+
+      <Footer />
     </div>
   );
 }

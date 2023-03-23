@@ -19,10 +19,10 @@ const Header = () => {
   useEffect(() => {
     setTokenBalComp(
       <>
-        <TokenBalance name={"XDC"} walletAddress={address} />
+        {/* <TokenBalance name={"XDC"} walletAddress={address} />
         <TokenBalance name={"ETH"} walletAddress={address} />
         <TokenBalance name={"BSC"} walletAddress={address} />
-        <TokenBalance name={"USDT"} walletAddress={address} />
+        <TokenBalance name={"USDT"} walletAddress={address} /> */}
       </>
     );
 
@@ -30,7 +30,7 @@ const Header = () => {
   }, [address]);
 
   return (
-    <div className="fixed left-0 top-0 w-full px-8 py-4 flex flex-col md:flex-row space-y-3 items-center justify-between">
+    <div className="fixed left-0 top-0 w-full px-8 py-4 flex flex-col md:flex-row items-center justify-between">
       <div className="flex items-center">
         {/* <img src="./uniswap.png" className="h-12" /> */}
         <NavItems />

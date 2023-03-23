@@ -70,7 +70,7 @@ export default function Home() {
     <div className="w-full h-screen lg:w-full md:w-full flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-emerald-400">
       <Header />
       <SwapComponent />
-      {/* <Footer /> */}
+      <Footer />
 
       {/* <SwapForm /> */}
     </div>

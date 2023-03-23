@@ -30,7 +30,7 @@ const PaymentComponents = ({ hisory }) => {
   const [token, settoken] = useState("");
   const [recipient, setrecipient] = useState("");
   return (
-    <div className="bg-zinc-900  md:w-[35%] w-[80%] mt-14  p-4 px-6 rounded-xl">
+    <div className="bg-zinc-900  md:w-[35%] w-[80%]  p-4 px-6 rounded-xl">
       <div className="flex items-center justify-between py-4 px-1">
         <p>XPayment - Make payment accross the globe</p>
       </div>
