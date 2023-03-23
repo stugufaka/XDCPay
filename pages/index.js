@@ -67,7 +67,7 @@ function SwapForm() {
 }
 export default function Home() {
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-emerald-400">
+    <div className="w-full h-screen lg:w-full md:w-full flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-emerald-400">
       <Header />
       <SwapComponent />
       {/* <Footer /> */}

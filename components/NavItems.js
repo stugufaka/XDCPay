@@ -4,9 +4,9 @@ import { ArrowSmUpIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 
 const NavItems = () => {
-  const CONVERT = "XConvert";
   const PAY = "XPayment";
-  const XLENDING = "XLending";
+  const XLENDING = "XPeerLending";
+  const CONVERT = "XConvert";
 
   const [selectedNavItem, setSelectedNavItem] = useState(CONVERT);
 
@@ -20,20 +20,20 @@ const NavItems = () => {
           {CONVERT}
         </p>
       </Link>
-      <Link href="/pay">
-        <p
-          className={getNavIconClassName(PAY)}
-          onClick={() => setSelectedNavItem(PAY)}
-        >
-          {PAY}
-        </p>
-      </Link>
       <Link href="/lending">
         <p
           className={getNavIconClassName(XLENDING)}
           onClick={() => setSelectedNavItem(XLENDING)}
         >
           {XLENDING}
+        </p>
+      </Link>
+      <Link href="/pay">
+        <p
+          className={getNavIconClassName(PAY)}
+          onClick={() => setSelectedNavItem(PAY)}
+        >
+          {PAY}
         </p>
       </Link>
     </div>

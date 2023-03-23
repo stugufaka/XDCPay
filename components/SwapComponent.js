@@ -100,7 +100,7 @@ const SwapComponent = () => {
   }, [outputValue, srcToken]);
 
   return (
-    <div className="bg-zinc-900 w-[35%] p-4 px-6 rounded-xl">
+    <div className="bg-zinc-900  md:w-[35%] w-[80%]  p-4 px-6 rounded-xl">
       <div className="flex items-center justify-between py-4 px-1">
         <p>XConvert</p>
       </div>
