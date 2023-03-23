@@ -2,17 +2,14 @@
 <p align="center">Start your project with Single Command</p>
 
 <p align="center">
-<a href="https://github.com/stugufaka/blockdrive/blob/master/LICENSE" title="License">
-<img src="https://img.shields.io/github/license/stugufaka/blockdrive" alt="blockdrive"/>
+<a href="https://github.com/stugufaka/XDCPay/blob/master/LICENSE" title="License">
+<img src="https://img.shields.io/github/license/stugufaka/XDCPay" alt="XDCPay"/>
 </a>
-<a href="https://github.com/stugufaka/blockdrive/fork" title="Forks">
-<img src="https://img.shields.io/github/forks/stugufaka/blockdrive" alt="blockdrive Forks"/>
+<a href="https://github.com/stugufaka/XDCPay/fork" title="Forks">
+<img src="https://img.shields.io/github/forks/stugufaka/XDCPay" alt="XDCPay Forks"/>
 </a>
-<a href="https://github.com/stugufaka/blockdrive" title="Stars">
-<img src="https://img.shields.io/github/stars/stugufaka/blockdrive" alt="blockdrive Stars"/>
-</a>
-<a href="https://img.shields.io/github/stars/stugufaka/blockdrive/issues" title="Issues">
-<img src="  https://img.shields.io/github/issues/stugufaka/blockdrive" alt="blockdrive Issues"/>
+<a href="https://github.com/stugufaka/XDCPay" title="Stars">
+<img src="https://img.shields.io/github/stars/stugufaka/XDCPay" alt="XDCPay Stars"/>
 </a>
 
 </a>
@@ -24,26 +21,30 @@
 <p align="center">
     <a href="https://youtu.be/v2ahviEfXv8" title="">🖥️ Video</a>
     .
-    <a href="https://blockdrive.netlify.app/app/dashboard" title="">🔗 Website</a>
+    <a href="https://XDCPay.netlify.app/app/dashboard" title="">🔗 Website</a>
     ·
-    <a href="https://github.com/stugufaka/blockdrive" title="">📂 Repo</a>
+    <a href="https://github.com/stugufaka/XDCPay" title="">📂 Repo</a>
     ·
-    <a href="https://github.com/stugufaka/blockdrive" title="🐛Report Bug/🎊Request Feature">🚀 Got Issue</a>
+    <a href="https://github.com/stugufaka/XDCPay" title="🐛Report Bug/🎊Request Feature">🚀 Got Issue</a>
 </p>
 
 ## 💪 Motivation
 
-With the ever-growing popularity of cryptocurrencies and the rise of blockchain technologies, the need for decentralized storage solutions has never been greater. Blockdrive is a decentralized cloud storage platform that is user-centered and security-minded. With Blockdrive, users can chat, convert files to NFTs, and share content with ease and confidence.
+Our app is designed to provide financial services that cater to the needs of everyone, regardless of their location or financial status. The payment app allows individuals to send and receive payments using a range of cryptocurrencies, promoting financial inclusion and making it easier for people to pay for goods and services regardless of their location. The exchange provides a seamless experience for individuals to convert between different cryptocurrencies, enabling people to access the benefits of the crypto economy.
+
+We have gone further by building a peer-to-peer lending platform that provides access to credit in a secure and transparent manner. Traditional lending institutions can be opaque and biased towards certain groups, making it difficult for many people to access the credit they need. By removing intermediaries and enabling borrowers and lenders to transact directly, we can reduce fees and promote financial inclusion for underserved communities.
+
+Our app is a tool for empowerment and social change. By leveraging blockchain technology, we can create a financial ecosystem that is transparent, decentralized, and accessible to everyone. We believe that everyone should have the opportunity to achieve their financial goals and build a better future for themselves and their families. Join us in our mission to build a more just and equitable society, one transaction at a time.
 
 ## 🚀 How it works
 
-Blockdrive is a decentralized cloud storage platform that leverages the use of IPFS and web3 storage to store files, thereby improving security. It also comes with chatting capabilities and the ability to convert a file into an NFT.
+Connect your account: Users then connect their cryptocurrency wallets to the app.
 
-We believe that data should be stored in a decentralized manner so that no single entity has control over it. This is why we have built our platform on top of IPFS and web3 storage. These technologies enable us to provide a secure and reliable storage solution for our users.
+Cryptocurrency payments: Users can send and receive payments using a range of cryptocurrencies, including XDC, USDT, ETH, and BNB. To make a payment, they would need to select the appropriate cryptocurrency, enter the recipient's wallet address, and specify the amount they want to send. The app would process the transaction and update the users' wallet balances accordingly.
 
-In addition to our storage capabilities, Blockdrive also offers chatting capabilities. This allows our users to communicate with each other directly through our platform. We believe that this feature will be particularly useful for those who need to collaborate on projects or files.
+Cryptocurrency exchange: Users can also exchange one cryptocurrency for another using the app. They would need to select the appropriate currencies and specify the amount they want to exchange. The app would process the transaction and update the users' wallet balances accordingly.
 
-Finally, we also offer the ability to convert a file into an NFT.
+Peer-to-peer lending: The app's peer-to-peer lending platform enables borrowers and lenders to transact directly using XDC, USDT, ETH, or BNB. Borrowers would need to create an account on the app and provide information about their creditworthiness. Lenders would also need to create an account and provide information about the funds they are willing to lend. Borrowers and lenders can then transact directly on the app, with the app facilitating the transaction and providing a secure and transparent platform.
 
 ## 🦋 Prerequisite
 
@@ -60,13 +61,13 @@ Finally, we also offer the ability to convert a file into an NFT.
 1. Clone the repository
 
 ```Bash
-git clone https://github.com/stugufaka/blockdrive
+git clone https://github.com/stugufaka/XDCPay
 ```
 
 2. Change the working directory
 
 ```Bash
-cd blockdrive
+cd XDCPay
 ```
 
 3. Start the local Hardhat node
@@ -108,9 +109,12 @@ module.exports = {
     hardhat: {
       chainId: 1337,
     },
-    matic: {
-      url: 'https://polygon-mumbai.g.alchemy.com/v2/{projectId}',
+    xdc: {
+      url: "https://erpc.apothem.network",
       accounts: [privateKey],
+      gas: 2100000,
+      gasPrice: 8000000000,
+      network_id: 51,
     },
   },
   solidity: {
