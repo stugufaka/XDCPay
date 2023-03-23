@@ -4,7 +4,7 @@ import "tailwindcss/tailwind.css"; // Import Tailwind CSS styles
 import { Dialog } from "@headlessui/react";
 import XLending from "../utils/XLending.json";
 import TransactionStatus from "./TransactionStatus";
-import { requestLoan } from "../utils/lendingQueries";
+import { requestLoan, repay } from "../utils/lendingQueries";
 function RequestLoanDialog({ open, setOpen, onSubmit }) {
   const [loanAmount, setLoanAmount] = useState("");
   const [interestRate, setInterestRate] = useState("");
@@ -80,10 +80,9 @@ const Borrower = ({ data, borrowerpendingloan, instance }) => {
   const [txPending, setTxPending] = useState(false);
   const [loanstatus_, setLoanStatus] = useState("");
 
-  async function requestLoanH() {
-    handleInterestRate();
+  async function repayLoan(loanId) {
     setTxPending(true);
-    let value = await requestLoan();
+    let value = await instance.repay(loanId);
     console.log(value);
     setTxPending(false);
     return value;
@@ -200,8 +199,7 @@ const Borrower = ({ data, borrowerpendingloan, instance }) => {
                       type="button"
                       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 rounded-full focus:ring-blue-300 font-medium text-sm px-3 py-2  mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                       onClick={() => {
-                        setOpen(true);
-                        setAddress(items.lenderAddress);
+                        repayLoan(index);
                       }}
                     >
                       {loanstatus_ ? "Repay" : "Pending"}

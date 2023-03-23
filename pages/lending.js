@@ -38,7 +38,7 @@ export default function Home() {
         const signer = provider.getSigner();
 
         const xlendingInstance = new ethers.Contract(
-          "0x33bCAcf9F250072E36382A492358109C5B159568",
+          "0xdadf25545C64Cb74AD7750Bc48831E04475d39FF",
           XLending.abi,
           signer
         );

@@ -139,11 +139,11 @@ export async function approveLoan(borrowerAddress, loanId) {
   }
 }
 
-export async function repay(loanId, amount) {
+export async function repay(loanId) {
   try {
     const valueInWei = ethers.utils.parseEther(amount.toString());
     const contractObj = await lendingContract();
-    const data = await contractObj.repay(loanId, { value: valueInWei });
+    const data = await contractObj.repay(loanId);
     const receipt = await data.wait();
     return receipt;
   } catch (e) {
