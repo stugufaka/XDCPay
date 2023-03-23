@@ -38,7 +38,7 @@ export default function Home() {
         const signer = provider.getSigner();
 
         const xlendingInstance = new ethers.Contract(
-          "0xdadf25545C64Cb74AD7750Bc48831E04475d39FF",
+          "0xa0A992E755C9034C38F4b345434E053F474E2378",
           XLending.abi,
           signer
         );
@@ -79,24 +79,60 @@ export default function Home() {
     <div className="w-full h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-400 to-emerald-400">
       <Header />
       {isLender == false && isBorrower == false ? (
-        <div className="flex flex-col justify-center items-center h-screen">
-          <div className="flex justify-center">
-            <button
-              onClick={() => {
-                becomeLender();
-              }}
-              className="bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-8 rounded-full mr-2"
-            >
-              I want to lend
-            </button>
-            <button
-              onClick={() => {
-                becomeBorrower();
-              }}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-4 px-8 rounded-full"
-            >
-              I want to borrow
-            </button>
+        // <div className="flex flex-col justify-center items-center h-screen">
+        //   <div className="flex justify-center">
+        //     <button
+        //       onClick={() => {
+        //         becomeLender();
+        //       }}
+        //       className="bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-8 rounded-full mr-2"
+        //     >
+        //       I want to lend
+        //     </button>
+        //     <button
+        //       onClick={() => {
+        //         becomeBorrower();
+        //       }}
+        //       className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-4 px-8 rounded-full"
+        //     >
+        //       I want to borrow
+        //     </button>
+        //   </div>
+        // </div>
+        <div className="card lg:card-side bg-base-100 shadow-xl m-7">
+          <figure>
+            <img
+              src="https://i.ibb.co/cL4h5T6/pexels-alesia-kozik-6771607.jpg"
+              alt="Album"
+            />
+          </figure>
+          <div className="card-body ">
+            <h2 className="card-title">XLending</h2>
+            <p>
+              XLending is the peer-to-peer XDC lending platform that puts you in
+              control.
+              <br />
+              Whether you're looking to borrow money or earn interest as a
+              lender
+            </p>
+            <div className="card-actions justify-end">
+              <button
+                className="btn btn-accent"
+                onClick={() => {
+                  becomeLender();
+                }}
+              >
+                Lender
+              </button>
+              <button
+                onClick={() => {
+                  becomeBorrower();
+                }}
+                className="btn btn-primary"
+              >
+                Borrower
+              </button>
+            </div>
           </div>
         </div>
       ) : (
@@ -137,53 +173,3 @@ export default function Home() {
     return value;
   }
 }
-
-// import React, { useState, useEffect } from "react";
-// import { ethers } from "ethers";
-// import XLending from "../utils/XLending.json";
-
-// function App() {
-//   const [lenders, setLenders] = useState([]);
-
-//   useEffect(() => {
-//     async function fetchData() {
-//       // Connect to the Ethereum network using MetaMask
-//       const provider = new ethers.providers.Web3Provider(window.ethereum);
-//       const { ethereum } = window;
-
-//       if (ethereum) {
-//         const signer = provider.getSigner();
-
-//         const xlendingInstance = new ethers.Contract(
-//           "0x0729d0199AdEc19A6b9C8Ed24225591F989d9544",
-//           XLending.abi,
-//           signer
-//         );
-
-//         // Call the getAllLenders function to get the list of all lenders
-//         const allLenders = await xlendingInstance.getAllLenders();
-
-//         // Set the state to the list of all lenders
-//         setLenders(allLenders);
-//       }
-//     }
-
-//     fetchData();
-//   }, []);
-
-//   console.log(lenders);
-//   return (
-//     <div>
-//       <h1>All Lenders:</h1>
-//       <ul>
-//         {lenders.map((lender) => (
-//           <li key={lender} className="text-white">
-//             {lender}
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
-
-// export default App;

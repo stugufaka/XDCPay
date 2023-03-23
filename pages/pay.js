@@ -62,7 +62,7 @@ export default function Home() {
       {tabactivepay ? (
         <PaymentComponent paymenthistory={history} />
       ) : (
-        <div className="md:w-[35%] w-[80%]  p-4 px-6 rounded-xl h-max">
+        <div className="  p-4 px-6 rounded-xl h-max">
           <table className="table table-zebra w-full">
             {/* head */}
             <thead>
@@ -70,7 +70,7 @@ export default function Home() {
                 <th></th>
                 <th>Token</th>
                 <th>Amount</th>
-                <th>Reciepient Address</th>
+                <th>To Address</th>
                 <th>Time</th>
               </tr>
             </thead>
@@ -78,6 +78,7 @@ export default function Home() {
               {history.map((items, index) => (
                 <tr>
                   <th>{index}</th>
+                  <th>{ellipseAddress(items.recipient)}</th>
                   <td>{items.token}</td>
                   <td>{ethers.utils.formatUnits(items?.amount?.toString())}</td>
                   <td>
@@ -91,46 +92,14 @@ export default function Home() {
           </table>
         </div>
       )}
-      {/* <p>Payment History</p */}
-
-      {/* <table class="w-[60%] rounded-10 text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs rounded-full text-white uppercase bg-gray-800 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" class="px-6 py-3">
-              Token
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Amount
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Recipient Address{" "}
-            </th>
-            <th scope="col" class="px-6 py-3">
-              Time{" "}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {history?.map((items, index) => {
-            return (
-              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="px-6 py-4">{items.token}</td>
-                <td class="px-6 py-4">{items.recipient}</td>
-                <td class="px-6 py-4">
-                  {ethers.utils.formatUnits(items?.amount?.toString())}
-                </td>
-                <td class="px-6 py-4">
-                  {new Date(
-                    items?.timestamp?.toString() * 1000
-                  ).toLocaleString()}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table> */}
 
       <Footer />
     </div>
   );
+
+  function ellipseAddress(address) {
+    const start = address.slice(0, 6); // Get the first 6 characters
+    const end = address.slice(-4); // Get the last 4 characters
+    return `${start}...${end}`; // Combine the start, ellipsis, and end
+  }
 }
