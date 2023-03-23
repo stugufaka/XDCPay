@@ -73,11 +73,12 @@ function RequestLoanDialog({ open, setOpen, onSubmit }) {
     </Dialog>
   );
 }
-const Borrower = ({ data, borrowerpendingloan }) => {
+const Borrower = ({ data, borrowerpendingloan, instance }) => {
   console.log(borrowerpendingloan);
   const [open, setOpen] = useState(false);
   const [address, setAddress] = useState("");
   const [txPending, setTxPending] = useState(false);
+  const [loanstatus_, setLoanStatus] = useState("");
 
   async function requestLoanH() {
     handleInterestRate();
@@ -87,6 +88,17 @@ const Borrower = ({ data, borrowerpendingloan }) => {
     setTxPending(false);
     return value;
   }
+
+  const getLoanStatus = async (address, index) => {
+    let value = await instance.checkLoanStatus(address, index);
+    setLoanStatus(value);
+  };
+
+  useEffect(() => {
+    borrowerpendingloan?.forEach((item, index) => {
+      getLoanStatus(item.borrowerAddress, index);
+    });
+  }, [data]);
 
   const handleRequestLoan = async (loanAmount, interestRate, deadline) => {
     // Code to submit loan request to the contract
@@ -192,7 +204,7 @@ const Borrower = ({ data, borrowerpendingloan }) => {
                         setAddress(items.lenderAddress);
                       }}
                     >
-                      Pending{" "}
+                      {loanstatus_ ? "Repay" : "Pending"}
                     </button>
                   </td>
                 </tr>

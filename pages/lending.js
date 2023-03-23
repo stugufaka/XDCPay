@@ -27,6 +27,7 @@ export default function Home() {
   const [pendingLoans, setpendingLoans] = useState([]);
   const [loangivenout, setAllLoansGivenOut] = useState("");
   const [borrowerpendingloan, setborrowerpendingLoan] = useState("");
+  const [instance, setinstance] = useState("");
   useEffect(() => {
     async function fetchData() {
       // Connect to the Ethereum network using MetaMask
@@ -42,22 +43,18 @@ export default function Home() {
           signer
         );
 
+        setinstance(xlendingInstance);
         // Call the getAllLenders function to get the list of all lenders
         const allLenders = await xlendingInstance.getAllLenders();
         const isLender = await xlendingInstance.isLender(address);
         const isBorrower = await xlendingInstance.isBorrower(address);
         const pendingloans = await xlendingInstance.getPendingLoans();
-        const allloansgiveout = await xlendingInstance.getAllLoansGivenOut(
-          address
-        );
 
         const borrowerPendingloan =
           await xlendingInstance.borrowerPendingLoans();
 
-        // console.log(upaidLoans);
         setborrowerpendingLoan(borrowerPendingloan);
-        setAllLoansGivenOut(allloansgiveout);
-        setAllLoansGivenOut(allloansgiveout);
+        // setAllLoansGivenOut(allloansgiveout);
         setpendingLoans(pendingloans);
         setIsLender(isLender);
         setIsBorrower(isBorrower);
@@ -106,12 +103,16 @@ export default function Home() {
         ""
       )}
       {isLender == true ? (
-        <Lender data={pendingLoans} loangivenout={loangivenout} />
+        <Lender data={pendingLoans} instance={instance} />
       ) : (
         ""
       )}
       {isBorrower == true ? (
-        <Borrower data={lenders} borrowerpendingloan={borrowerpendingloan} />
+        <Borrower
+          data={lenders}
+          borrowerpendingloan={borrowerpendingloan}
+          instance={instance}
+        />
       ) : (
         ""
       )}
