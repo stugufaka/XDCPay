@@ -73,7 +73,8 @@ function RequestLoanDialog({ open, setOpen, onSubmit }) {
     </Dialog>
   );
 }
-const Borrower = ({ data }) => {
+const Borrower = ({ data, borrowerpendingloan }) => {
+  console.log(borrowerpendingloan);
   const [open, setOpen] = useState(false);
   const [address, setAddress] = useState("");
   const [txPending, setTxPending] = useState(false);
@@ -145,6 +146,53 @@ const Borrower = ({ data }) => {
                       }}
                     >
                       Request Loan
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="relative w-5/6 overflow-x-auto shadow-md sm:rounded-lg">
+        <p className="text-lg py-4">List of Pending Loans</p>
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-6 py-3">
+                Your Address{" "}
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Loan amount{" "}
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Interest Rate
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {borrowerpendingloan?.map((items, index) => {
+              return (
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td class="px-6 py-4">{items.borrowerAddress}</td>
+                  <td class="px-6 py-4">
+                    {ethers.utils.formatUnits(items.loanAmount.toString())}
+                  </td>
+                  <td class="px-6 py-4">{items.interestRate.toString()}%</td>
+                  <td class="px-6 py-4 text-left">
+                    <button
+                      type="button"
+                      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 rounded-full focus:ring-blue-300 font-medium text-sm px-3 py-2  mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                      onClick={() => {
+                        setOpen(true);
+                        setAddress(items.lenderAddress);
+                      }}
+                    >
+                      Pending{" "}
                     </button>
                   </td>
                 </tr>

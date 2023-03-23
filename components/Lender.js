@@ -6,7 +6,7 @@ import XLending from "../utils/XLending.json";
 import TransactionStatus from "./TransactionStatus";
 import { approveLoan, requestLoan } from "../utils/lendingQueries";
 
-const Lender = ({ data }) => {
+const Lender = ({ data, loangivenout }) => {
   console.log(data);
   const [open, setOpen] = useState(false);
   const [address, setAddress] = useState("");
@@ -21,10 +21,11 @@ const Lender = ({ data }) => {
     return value;
   };
 
+  //   console.log();
   return (
     <>
       <div class="relative w-5/6 overflow-x-auto shadow-md sm:rounded-lg">
-        <p className="text-lg py-4">List of All lenders you can borrow from</p>
+        <p className="text-lg py-4">List of Loans directed to you</p>
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -69,6 +70,42 @@ const Lender = ({ data }) => {
                       Give loan out{" "}
                     </button>
                   </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="relative w-5/6 overflow-x-auto shadow-md sm:rounded-lg">
+        <p className="text-lg py-4">List of Loans Given out</p>
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-6 py-3">
+                Borrower Address{" "}
+              </th>
+              <th scope="col" class="px-6 py-3">
+                interestRate{" "}
+              </th>
+              <th scope="col" class="px-6 py-3">
+                loanAmount
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Borrowers score
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {loangivenout?.map((items, index) => {
+              return (
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td class="px-6 py-4">{items.borrowerAddress}</td>
+                  <td class="px-6 py-4">{items.interestRate.toString()}</td>
+                  <td class="px-6 py-4">
+                    {ethers.utils.formatUnits(items.loanAmount.toString())}
+                  </td>
+                  <td class="px-6 py-4">{items.score.toString()}</td>
                 </tr>
               );
             })}

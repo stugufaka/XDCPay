@@ -25,7 +25,8 @@ export default function Home() {
   const [isBorrower, setIsBorrower] = useState("");
   const [interestRate, setInterestRate] = useState(0);
   const [pendingLoans, setpendingLoans] = useState([]);
-
+  const [loangivenout, setAllLoansGivenOut] = useState("");
+  const [borrowerpendingloan, setborrowerpendingLoan] = useState("");
   useEffect(() => {
     async function fetchData() {
       // Connect to the Ethereum network using MetaMask
@@ -36,7 +37,7 @@ export default function Home() {
         const signer = provider.getSigner();
 
         const xlendingInstance = new ethers.Contract(
-          "0xFB751FFf9Af97EE517BcBeC04C6A8384e3C8eB2B",
+          "0x33bCAcf9F250072E36382A492358109C5B159568",
           XLending.abi,
           signer
         );
@@ -46,11 +47,17 @@ export default function Home() {
         const isLender = await xlendingInstance.isLender(address);
         const isBorrower = await xlendingInstance.isBorrower(address);
         const pendingloans = await xlendingInstance.getPendingLoans();
-        // const upaidLoans = await xlendingInstance.borrowerPendingLoans();
+        const allloansgiveout = await xlendingInstance.getAllLoansGivenOut(
+          address
+        );
+
+        const borrowerPendingloan =
+          await xlendingInstance.borrowerPendingLoans();
 
         // console.log(upaidLoans);
-        // console.log(upaidLoans[0].loanAmount.toString());
-        // Set the state to the list of all lenders
+        setborrowerpendingLoan(borrowerPendingloan);
+        setAllLoansGivenOut(allloansgiveout);
+        setAllLoansGivenOut(allloansgiveout);
         setpendingLoans(pendingloans);
         setIsLender(isLender);
         setIsBorrower(isBorrower);
@@ -99,47 +106,17 @@ export default function Home() {
         ""
       )}
       {isLender == true ? (
-        <Lender data={pendingLoans} />
+        <Lender data={pendingLoans} loangivenout={loangivenout} />
       ) : (
-        // <div className="flex flex-col justify-center items-center h-screen">
-        //   <div className="flex justify-center">
-        //     <p>You are a lender</p>
-        //   </div>
-        // </div>
         ""
       )}
       {isBorrower == true ? (
-        <Borrower data={lenders} />
+        <Borrower data={lenders} borrowerpendingloan={borrowerpendingloan} />
       ) : (
-        // <div className="flex flex-col justify-center items-center h-screen">
-        //   <div className="flex justify-center">
-        //     <p>You are a borrower</p>
-        //   </div>
-        // </div>
         ""
       )}
 
       {txPending && <TransactionStatus />}
-
-      {/* <button
-      // onClick={async () => {
-      //   await getAllLenders();
-      //   // isLenderFnc();
-      //   // becomeLender();
-      // }}
-      >
-        Become a lender
-      </button>
-      <button
-        onClick={() => {
-          becomeBorrower();
-        }}
-      >
-        Become a borrower
-      </button>
-      {txPending && <TransactionStatus />}
-
-      <PaymentComponent /> */}
     </div>
   );
 
