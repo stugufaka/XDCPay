@@ -19,7 +19,7 @@
 
 <h2 align="center">🌐 Links 🌐</h2>
 <p align="center">
-    <a href="https://www.youtube.com/watch?v=8enz6PT-jro" title="">🖥️ Video</a>
+    <a href="https://www.youtube.com/watch?v=fw7eI36UGi4" title="">🖥️ Video</a>
     .
     <a href="https://xdcpay.netlify.app/" title="">🔗 Website</a>
     ·
