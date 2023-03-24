@@ -68,9 +68,9 @@ export default function Home() {
             <thead>
               <tr>
                 <th></th>
+                <th>To Address</th>
                 <th>Token</th>
                 <th>Amount</th>
-                <th>To Address</th>
                 <th>Time</th>
               </tr>
             </thead>

@@ -77,7 +77,7 @@ const TokenBalance = ({ name, walletAddress }) => {
 
       {txPending && <TransactionStatus />}
 
-      <Toaster />
+      {/* <Toaster /> */}
     </div>
   );
 };

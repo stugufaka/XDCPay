@@ -49,7 +49,7 @@ const Header = () => {
         />
       </div>
 
-      <Toaster />
+      {/* <Toaster /> */}
     </div>
   );
 };

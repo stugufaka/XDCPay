@@ -10,7 +10,7 @@ export const contract = async () => {
     const signer = provider.getSigner();
 
     const contractReader = new ethers.Contract(
-      "0xb11dd1e60D576F371e3458b788f0562e0add545D",
+      "0x85b2FD5f1e413168f131A41EB0c8b858642314c2",
       XDCPayABI.abi,
       signer
     );
@@ -27,7 +27,7 @@ export const lendingContract = async () => {
     const signer = provider.getSigner();
 
     const contractReader = new ethers.Contract(
-      "0xa0A992E755C9034C38F4b345434E053F474E2378",
+      "0x27f928399Ed5EE0266104323CBE11967B97a8c46",
       XLending.abi,
       signer
     );
