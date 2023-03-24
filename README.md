@@ -21,7 +21,7 @@
 <p align="center">
     <a href="https://www.youtube.com/watch?v=8enz6PT-jro" title="">🖥️ Video</a>
     .
-    <a href="https://XDCPay.netlify.app/app/dashboard" title="">🔗 Website</a>
+    <a href="https://xdcpay.netlify.app/" title="">🔗 Website</a>
     ·
     <a href="https://github.com/stugufaka/XDCPay" title="">📂 Repo</a>
     ·
