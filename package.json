@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "ESLINT_NO_DEV_ERRORS=true next build",
+    "build": "ESLINT_NO_INLINED_CONFIG=true next build",
     "start": "next start",
     "lint": "next lint"
   },
