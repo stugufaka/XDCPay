@@ -1,7 +1,6 @@
 import Footer from "../components/Footer";
 import React, { useEffect, useState, useRef } from "react";
 import Header from "../components/Header";
-import PaymentComponent from "../components/payment";
 import SwapComponent from "../components/SwapComponent";
 import { ethers } from "ethers";
 import XLending from "../utils/XLending.json";

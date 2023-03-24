@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import PaymentComponent from "../components/payment";
+import PaymentComponent from "../components/Payment";
 import SwapComponent from "../components/SwapComponent";
 import XPayment from "../utils/XDCPay.json";
 import { LogDescription } from "ethers/lib/utils";
